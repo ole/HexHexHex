@@ -1,14 +1,14 @@
 import Foundation
 
 public struct HEXParser {
-  var text: Substring.UTF8View
+  var text: String
 
   public init(text: String) {
-    self.text = text[...].utf8
+    self.text = text
   }
 
   public func parse() throws -> [Record] {
-    var consumableText = text
+    var consumableText = text[...].utf8
     var records: [Record] = []
     while !consumableText.isEmpty {
       let record = try Self.parseRecord(in: &consumableText)
