@@ -5,6 +5,17 @@ public enum Record: Equatable {
   case startSegmentAddress(codeSegment: Address16, instructionPointer: Address16)
   case extendedLinearAddress(upperBits: Address16)
   case startLinearAddress(Address32)
+ 
+  public var kind: Record.Kind {
+    switch self {
+    case .data: return .data
+    case .endOfFile: return .endOfFile
+    case .extentedSegmentAddress: return .extendedSegmentAddress
+    case .startSegmentAddress: return .startSegmentAddress
+    case .extendedLinearAddress: return .extendedLinearAddress
+    case .startLinearAddress: return .startLinearAddress
+    }
+  }
 }
 
 extension Record {
