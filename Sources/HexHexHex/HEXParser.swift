@@ -60,7 +60,7 @@ extension HEXParser {
         throw Error(kind: .expectedDifferentByteCount(expected: 2, actual: byteCount), position: byteCountIndex)
       }
       let address = dataBytes.reduce(0) { acc, byte in acc << 8 + UInt16(byte) }
-      return .extentedSegmentAddress(Address16(rawValue: address))
+      return .extendedSegmentAddress(Address16(rawValue: address))
     case .startSegmentAddress:
       guard byteCount == 4 else {
         throw Error(kind: .expectedDifferentByteCount(expected: 4, actual: byteCount), position: byteCountIndex)

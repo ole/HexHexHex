@@ -4,7 +4,7 @@
 public enum Record: Equatable {
   case data(Address16, [UInt8])
   case endOfFile
-  case extentedSegmentAddress(Address16)
+  case extendedSegmentAddress(Address16)
   case startSegmentAddress(codeSegment: Address16, instructionPointer: Address16)
   case extendedLinearAddress(upperBits: Address16)
   case startLinearAddress(Address32)
@@ -13,7 +13,7 @@ public enum Record: Equatable {
     switch self {
     case .data: return .data
     case .endOfFile: return .endOfFile
-    case .extentedSegmentAddress: return .extendedSegmentAddress
+    case .extendedSegmentAddress: return .extendedSegmentAddress
     case .startSegmentAddress: return .startSegmentAddress
     case .extendedLinearAddress: return .extendedLinearAddress
     case .startLinearAddress: return .startLinearAddress
