@@ -14,7 +14,11 @@ public struct HEXParser {
     var consumableText = text[...].utf8
     var records: [Record] = []
     while !consumableText.isEmpty {
+      let recordStart = consumableText.startIndex
       let record = try Self.parseRecord(in: &consumableText)
+      if let previousRecord = records.last, previousRecord.kind == .endOfFile {
+        throw Error(kind: .fileContinuesAfterEndOfFile, position: recordStart)
+      }
       records.append(record)
     }
     return records
@@ -178,6 +182,7 @@ extension HEXParser.Error {
     case expectedLineBreak
     case invalidChecksum
     case expectedDifferentByteCount(expected: Int, actual: Int)
+    case fileContinuesAfterEndOfFile
 
     var errorCode: Int {
       switch self {
@@ -187,6 +192,7 @@ extension HEXParser.Error {
       case .expectedLineBreak: return 4
       case .invalidChecksum: return 5
       case .expectedDifferentByteCount: return 6
+      case .fileContinuesAfterEndOfFile: return 7
       }
     }
 
@@ -198,6 +204,7 @@ extension HEXParser.Error {
       case .expectedLineBreak: return "expectedLineBreak"
       case .invalidChecksum: return "invalidChecksum"
       case .expectedDifferentByteCount(let expected, let actual): return "expectedDifferentByteCount: expected: \(expected) actual: \(actual)"
+      case .fileContinuesAfterEndOfFile: return "fileContinuesAfterEndOfFile"
       }
     }
   }

@@ -49,4 +49,17 @@ final class HEXParserTests: XCTestCase {
       .endOfFile,
     ])
   }
+
+  func testThrowsIfEndOfFileIsNotLastRecord() {
+    let hex = """
+      :020000040000FA
+      :1000000025001C0C0200080C06006306590AE306D2
+      :00000001FF
+      :021FFE00EF0FE3
+      """
+    let parser = HEXParser(text: hex)
+    XCTAssertThrowsError(try parser.parse()) { error in
+      XCTAssertEqual((error as? HEXParser.Error)?.kind, .fileContinuesAfterEndOfFile)
+    }
+  }
 }
