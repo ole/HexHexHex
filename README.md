@@ -16,7 +16,7 @@ dependencies: [
 
 ### Code
 
-Creating a `HEXFile` value from the text of a .hex file:
+Creating a [`HEXFile`](Sources/HexHexHex/HEXFile.swift) value from the text of a .hex file:
 
 ```swift
 import HexHexHex
@@ -30,10 +30,26 @@ let hexText = """
 let hexFile = try HEXFile(text: hexText)
 ```
 
-The `HEXFile` value contains an array of `Record` values that represent the records in the .hex file:
+The `HEXFile` value contains an array of [`Record`](Sources/HexHexHex/Record.swift) values that represent the records in the .hex file:
 
 ```swift
-print(hexFile.records)
+debugPrint(hexFile)
+/*
+HEXFile (4 records)
+  04 extended linear address – 0000
+  00 data – address: 0000, data: 25 00 1C 0C 02 00 08 0C 06 00 63 06 59 0A E3 06
+  00 data – address: 00B0, data: 59 0A 00 0C 30 00 07 0C 26 00 03 00
+  01 end of file
+ */
+
+// Get all data records in the file
+let dataRecords = hexFile.records.filter { $0.kind == .data }
+print(dataRecords)
+
+// Print out the addresses of all data records in the file
+for case .data(let address, _) in hexFile.records {
+  print(address)
+}
 ```
 
 ## Author
