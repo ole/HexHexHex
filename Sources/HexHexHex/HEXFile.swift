@@ -32,3 +32,16 @@ public struct HEXFile {
     try self.init(text: text)
   }
 }
+
+extension HEXFile: CustomStringConvertible, CustomDebugStringConvertible {
+  public var description: String {
+    "HEXFile (\(records.count) records)"
+  }
+
+  public var debugDescription: String {
+    """
+    HEXFile (\(records.count) records)
+      \(records.map(String.init(describing:)).joined(separator: "\n  "))
+    """
+  }
+}

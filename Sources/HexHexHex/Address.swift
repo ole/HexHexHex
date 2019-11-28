@@ -15,7 +15,7 @@ extension Address16: ExpressibleByIntegerLiteral {
 
 extension Address16: CustomStringConvertible, CustomDebugStringConvertible {
   public var description: String {
-    "0x\(String(rawValue, radix: 16, uppercase: true))"
+    "0x\(rawValue.hex(padTo: 2, uppercase: true))"
   }
 
   public var debugDescription: String {
@@ -40,7 +40,7 @@ extension Address32: ExpressibleByIntegerLiteral {
 
 extension Address32: CustomStringConvertible, CustomDebugStringConvertible {
   public var description: String {
-    "0x\(String(rawValue, radix: 16, uppercase: true))"
+    "0x\(rawValue.hex(padTo: 4, uppercase: true))"
   }
 
   public var debugDescription: String {
