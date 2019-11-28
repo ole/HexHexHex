@@ -54,3 +54,31 @@ extension Record {
     case startLinearAddress = 0x05
   }
 }
+
+extension Record: CustomStringConvertible {
+  public var description: String {
+    var desc = "\(UInt(kind.rawValue).hex(padTo: 2)) "
+    switch self {
+    case .data(let address, let bytes):
+      let addressString = address.rawValue.hex(padTo: 4, uppercase: true)
+      let byteString = bytes.map { $0.hex(padTo: 2, uppercase: true) }.joined(separator: " ")
+      desc += "data – address: \(addressString), data: \(byteString)"
+    case .endOfFile:
+      desc += "end of file"
+    case .extendedSegmentAddress(let address):
+      let addressString = address.rawValue.hex(padTo: 4, uppercase: true)
+      desc += "extended segment address – \(addressString)"
+    case .startSegmentAddress(let codeSegment, let instructionPointer):
+      let codeSegmentString = codeSegment.rawValue.hex(padTo: 4, uppercase: true)
+      let instructionPointerString = instructionPointer.rawValue.hex(padTo: 4, uppercase: true)
+      desc += "start segment address – CS: \(codeSegmentString), IP: \(instructionPointerString)"
+    case .extendedLinearAddress(let address):
+      let addressString = address.rawValue.hex(padTo: 4, uppercase: true)
+      desc += "extended linear address – \(addressString)"
+    case .startLinearAddress(let address):
+      let addressString = address.rawValue.hex(padTo: 8, uppercase: true)
+      desc += "start linear address – \(addressString)"
+    }
+    return desc
+  }
+}

@@ -7,8 +7,8 @@ extension UnsignedInteger {
   ///   left-padded with zeros. If the converted number is longer than `length`,
   ///   the full length will be returned. If `length` is `nil`, no padding
   ///   will be applied.
-  public func hex(padTo length: Int? = nil) -> String {
-    let hex = String(self, radix: 16)
+  public func hex(padTo length: Int? = nil, uppercase: Bool = false) -> String {
+    let hex = String(self, radix: 16, uppercase: uppercase)
     if let length = length, hex.count < length {
       return String(repeating: "0", count: length - hex.count) + hex
     } else {
