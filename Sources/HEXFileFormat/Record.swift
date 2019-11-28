@@ -1,3 +1,6 @@
+/// A record in the Intel Hexadecimal Object File Format (.hex).
+///
+/// - SeeAlso: https://en.wikipedia.org/wiki/Intel_HEX
 public enum Record: Equatable {
   case data(Address16, [UInt8])
   case endOfFile

@@ -1,5 +1,8 @@
 import Foundation
 
+/// A parser for the Intel Hexadecimal Object File Format (.hex).
+///
+/// - SeeAlso: https://en.wikipedia.org/wiki/Intel_HEX
 public struct HEXParser {
   var text: String
 
@@ -18,9 +21,6 @@ public struct HEXParser {
   }
 }
 
-/// A parser for the Intel Hexadecimal Object File Format (.hex).
-///
-/// https://en.wikipedia.org/wiki/Intel_HEX
 extension HEXParser {
   /// Record format:
   ///
