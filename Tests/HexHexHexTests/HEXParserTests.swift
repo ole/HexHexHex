@@ -1,5 +1,5 @@
 import XCTest
-import HEXFileFormat
+import HexHexHex
 
 final class HEXParserTests: XCTestCase {
   func testParseEndOfFileRecord() throws {
