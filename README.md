@@ -2,6 +2,8 @@
 
 A parser for the [Intel Hexadecimal Object File Format (.hex)](https://en.wikipedia.org/wiki/Intel_HEX), written in Swift.
 
+![](https://github.com/ole/HexHexHex/workflows/macOS/badge.svg) ![](https://github.com/ole/HexHexHex/workflows/Linux/badge.svg)
+
 ## Usage
 
 ### Add HexHexHex as a Swift Package Manager dependency
